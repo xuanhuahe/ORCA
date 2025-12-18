@@ -1,1128 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ORCA - Active Intelligence in Video Avatars</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>ORCA - Active Intelligence in Video Avatars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#28282d">
 
-  <style>
-    :root {
-      --apple-blue: #0071e3;
-      --apple-blue-hover: #0077ed;
-      --apple-gray: #f5f5f7;
-      --apple-gray-dark: #e8e8ed;
-      --text-primary: #1d1d1f;
-      --text-secondary: #86868b;
-      --text-tertiary: #6e6e73;
-      --border-color: rgba(0, 0, 0, 0.08);
-      --max-width: 980px;
-      --max-width-large: 1200px;
-    }
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.1/css/academicons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Raleway:wght@600&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .bibtex-container {
-  background: #f5f5f7;
-  padding: 24px;
-  border-radius: 12px;
-  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace; /* 核心：代码字体 */
-  font-size: 14px;
-  color: #333;
-  overflow-x: auto;
-  border: 1px solid rgba(0,0,0,0.05);
-  text-align: left; /* 必须左对齐 */
-}
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #fff;
-      color: var(--text-primary);
-      line-height: 1.47059;
-      font-weight: 400;
-      letter-spacing: -0.022em;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    .benchmark-intro {
-  max-width: 800px;
-  margin: 0px auto 48px; /* 向上抵消一点 header 的 margin，向下推开 marquee */
-  text-align: center;
-}
-
-.section-description {
-  font-size: 19px;
-  line-height: 1.4;
-  color: var(--text-secondary);
-  margin-bottom: 40px;
-}
-
-.section-description strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.stats-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-number {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--apple-blue); /* 使用主题色强调数据 */
-  line-height: 1.1;
-  margin-bottom: 4px;
-}
-
-.stat-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* 竖线分割符 */
-.stat-line {
-  width: 1px;
-  height: 40px;
-  background-color: var(--border-color);
-  transform: rotate(15deg); /* 稍微倾斜一点，更有设计感 */
-}
-
-/* 移动端适配 */
-@media (max-width: 735px) {
-  .stats-grid {
-    flex-wrap: wrap;
-    gap: 16px 32px;
-  }
-  .stat-line {
-    display: none; /* 手机上隐藏分割线，直接换行 */
-  }
-  .section-description {
-    font-size: 16px;
-    padding: 0 16px;
-  }
-}
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 22px;
-    }
-
-    .container-large {
-      max-width: var(--max-width-large);
-      margin: 0 auto;
-      padding: 0 22px;
-    }
-
-    /* ========== HERO ========== */
-    .hero {
-      padding: 52px 0 96px;
-      text-align: center;
-      background: #fbfbfd;
-    }
-
-    .hero-eyebrow {
-      font-size: 17px;
-      line-height: 1.23536;
-      font-weight: 600;
-      letter-spacing: -0.022em;
-      color: var(--apple-blue);
-      margin-bottom: 16px;
-    }
-
-    .hero-title {
-      font-size: 56px;
-      line-height: 1.07143;
-      font-weight: 700;
-      letter-spacing: -0.005em;
-      color: var(--text-primary);
-      margin: 0 auto 24px;
-      max-width: 820px;
-    }
-
-    .hero-subtitle {
-      font-size: 28px;
-      line-height: 1.14286;
-      font-weight: 400;
-      letter-spacing: 0.007em;
-      color: var(--text-secondary);
-      margin: 0 auto 48px;
-      max-width: 680px;
-    }
-
-    /* Authors */
-    .authors-section {
-      margin: 56px auto 32px;
-      max-width: 800px;
-    }
-
-    .authors-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px 20px;
-      font-size: 17px;
-      line-height: 1.47059;
-      margin-bottom: 16px;
-    }
-
-    .author-name {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .author-name:hover {
-      color: var(--apple-blue);
-    }
-
-    .sup {
-      font-size: 0.65em;
-      vertical-align: super;
-      color: var(--text-secondary);
-      margin-left: 2px;
-    }
-
-    .affiliations {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px 24px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .affiliation-item {
-      white-space: nowrap;
-    }
-
-    .author-notes {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-top: 16px;
-    }
-
-    /* Buttons */
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 22px;
-      font-size: 17px;
-      line-height: 1.17648;
-      font-weight: 400;
-      text-decoration: none;
-      border-radius: 980px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--apple-blue);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--apple-blue-hover);
-      transform: scale(1.02);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--apple-blue);
-      border: 1px solid var(--apple-blue);
-    }
-
-    .btn-secondary:hover {
-      background: var(--apple-blue);
-      color: #fff;
-      transform: scale(1.02);
-    }
-
-    /* ========== SECTION ========== */
-    .section {
-      padding: 88px 0;
-    }
-
-    .section-gray {
-      background: var(--apple-gray);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-title {
-      font-size: 48px;
-      line-height: 1.08349;
-      font-weight: 700;
-      letter-spacing: -0.003em;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 21px;
-      line-height: 1.381;
-      font-weight: 400;
-      color: var(--text-secondary);
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    /* ========== ABSTRACT ========== */
-    .abstract-content {
-      max-width: 800px;
-      margin: 0 auto 60px;
-    }
-
-    .abstract-text {
-      font-size: 18px;
-      line-height: 1.52381;
-      font-weight: 400;
-      color: var(--text-primary);
-      text-align: left;
-    }
-
-    .abstract-text strong {
-      font-weight: 600;
-      color: var(--apple-blue);
-    }
-
-    .teaser-image {
-      width: 85%;
-      max-width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-      display: block;
-      margin: 0 auto;
-    }
-
-    /* ========== BENCHMARK ========== */
-    .marquee-container {
-      overflow: hidden;
-      margin: 0 -22px;
-      padding: 20px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 20px;
-      animation: scroll 40s linear infinite;
-      width: max-content;
-    }
-
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-container {
-  overflow: hidden;
-  padding: 40px 0; /* 给阴影留出空间 */
-  background: linear-gradient(to bottom, #f5f5f5 0%, #fff 100%); /* 增加一点层次 */
-}
-
-/* 每一行的轨道 */
-.marquee-container {
-  overflow: hidden;
-  padding: 40px 0;
-  background: #f8f9fa; /* 浅灰底色，区分内容 */
-  position: relative;
-}
-
-/* 左右两侧加一点渐变遮罩，让滚动看起来是从虚无中出来的（可选，但这显得很高级） */
-.marquee-container::before,
-.marquee-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none; /* 防止遮挡鼠标点击 */
-}
-.marquee-container::before {
-  left: 0;
-  background: linear-gradient(to right, #f8f9fa, transparent);
-}
-.marquee-container::after {
-  right: 0;
-  background: linear-gradient(to left, #f8f9fa, transparent);
-}
-
-/* 轨道通用样式 */
-.marquee-track {
-  display: flex;
-  gap: 24px; /* 卡片之间的间距 */
-  width: max-content; /* 让宽度自适应内容长度 */
-}
-
-/* 第一行：向左滚 */
-.track-row-1 {
-  animation: scrollLeft 40s linear infinite;
-}
-
-/* 第二行：向右滚 (错开视觉疲劳) */
-.track-row-2 {
-  margin-top: 24px; /* 两行之间的垂直间距 */
-  animation: scrollRight 45s linear infinite; /* 稍微慢一点或快一点，制造错落感 */
-}
-
-/* 鼠标放上去暂停 (放在大容器上，意味着鼠标只要进区域，两行都停) */
-.marquee-container:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-/* 动画定义 */
-@keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* 假设你复制了一份，移动50%就是无缝循环 */
-}
-
-@keyframes scrollRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-/* 卡片样式修正 (防止高度不齐) */
-.bench-card {
-  flex: 0 0 320px;
-  height: 360px; /* 固定高度，确保两行整齐 */
-  background: #fff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-  /* 如果用 flex column 布局 */
-  display: flex;
-  flex-direction: column;
-}
-
-/* 让图片占满上部 */
-.bench-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  flex-shrink: 0; /* 防止图片被压缩 */
-}
-
-/* 内容区 */
-.bench-content {
-  padding: 20px;
-  flex-grow: 1; /* 撑满剩余空间 */
-  display: flex;
-  flex-direction: column;
-}
-
-/* 描述文字限制行数 */
-.bench-description {
-  font-size: 14px;
-  color: #666;
-  margin-top: auto; /* 把描述推到底部，或者上面的 title margin-bottom */
-  
-  /* 限制显示3行，超出省略，保证卡片不炸 */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-    .bench-card {
-      flex: 0 0 320px;
-  height: 340px; /* 定死高度，显得整齐 */
-  display: flex;
-  flex-direction: column;
-        background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .bench-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    }
-
-    .bench-image {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .bench-content {
-      padding: 20px;
-    }
-
-    .bench-category {
-      font-size: 12px;
-      line-height: 1.33337;
-      font-weight: 600;
-      color: var(--apple-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-    }
-
-    .bench-title {
-      font-size: 19px;
-      line-height: 1.21053;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-
-    .bench-description {
-      font-size: 14px;
-      line-height: 1.42859;
-      color: var(--text-secondary);
-      display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-    }
-
-    /* ========== TABS ========== */
+    <style>
     .tabs-sticky {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(40, 40, 45, 0.85); /* 适配背景色 */
+      backdrop-filter: blur(20px);
       padding: 20px 0;
       margin-bottom: 48px;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .tabs-container {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .tab-button {
-      padding: 8px 20px;
-      font-size: 14px;
-      line-height: 1.42859;
-      font-weight: 400;
-      color: var(--text-secondary);
+      padding: 10px 24px;
+      font-size: 15px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 600;
+      color: var(--text-sub);
       background: transparent;
-      border: none;
-      border-radius: 980px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
 
     .tab-button:hover {
-      color: var(--text-primary);
-      background: var(--apple-gray);
+      color: #fff;
+      border-color: #fff;
+      background: rgba(255,255,255,0.05);
     }
 
     .tab-button.active {
       color: #fff;
-      background: var(--apple-blue);
-      font-weight: 500;
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 15px rgba(60, 140, 255, 0.4);
     }
 
     .tab-content {
       display: none;
+      animation: fadeIn 0.4s ease;
     }
 
     .tab-content.active {
       display: block;
-      animation: fadeIn 0.3s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* ========== CASES ========== */
-    .case-item {
-      margin-bottom: 72px;
+    
+    /* 图标颜色修正 */
+    .case-header i {
+        color: var(--accent-blue);
     }
 
-    .case-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
-    }
+        /* ================= Global Variables & Reset ================= */
+        :root {
+            --intro-scale: 0;
+            --accent-blue: rgb(60, 140, 255);
+            --bg-dark: #28282d;
+            --bg-darker: #1d1d21;
+            --text-main: #fff;
+            --text-sub: #b9bbc6;
+        }
 
-    .case-number {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+        * { box-sizing: border-box; }
 
-    .case-title {
-      font-size: 24px;
-      line-height: 1.16667;
-      font-weight: 600;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        body {
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
 
-    .case-title i {
-      color: var(--apple-blue);
-      font-size: 20px;
-    }
+        /* ================= Typography ================= */
+        h1, h2, h3, h4, h5 { font-family: "Raleway", sans-serif; font-weight: 600; margin: 0; }
+        h1 { font-size: 48px; line-height: 1.1; }
+        h2 { font-size: 32px; margin-bottom: 24px; }
+        h3 { font-size: 20px; font-weight: 400; }
+        p { font-size: 17px; color: var(--text-sub); line-height: 1.6; font-weight: 300; }
+        
+        a { color: var(--accent-blue); text-decoration: none; transition: color 0.3s; }
+        a:hover { color: #fff; }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
+        /* ================= Layout Utilities ================= */
+        section {
+            padding: 80px calc(50vw - min(45vw, 1400px / 2));
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
 
-    .video-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-      aspect-ratio: 16 / 9;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .video-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
+        .text-center { text-align: center; }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+        .mb-large { margin-bottom: 64px; }
+        .mb-small { margin-bottom: 24px; }
 
-    .video-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
+        /* ================= Hero Section ================= */
+        #intro {
+            height: 100vh;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .video-label {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      padding: 4px 10px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 500;
-      border-radius: 6px;
-      z-index: 2;
-    }
+        #intro .background-video {
+            position: absolute;
+            top: 0; left: 0;
+            width: calc(100vw * (1 - var(--intro-scale)) + min(90vw, 1600px) * var(--intro-scale));
+            height: calc(100vh * (1 - var(--intro-scale)) + 90vh * var(--intro-scale));
+            border-radius: calc(0px * (1 - var(--intro-scale)) + 16px * var(--intro-scale));
+            overflow: hidden;
+            z-index: 0;
+            transition: all 0.1s ease-out;
+        }
 
-    .video-item.ours {
-      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
-      transform: scale(1.02);
-    }
+        #intro video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(40%) blur(8px);
+            transform: scale(1.1);
+        }
 
-    .video-item.ours .video-label {
-      background: var(--apple-blue);
-      font-weight: 600;
-    }
+        #intro .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
 
-    .video-item.ours:hover {
-      transform: scale(1.02) translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4);
-    }
+        .hero-title {
+            font-size: 56px;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, #b9bbc6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    /* ========== METRICS ========== */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 64px;
-    }
+        /* Authors */
+        .authors-list {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px;
+            font-size: 18px; margin-bottom: 16px;
+        }
+        .author-name { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .affiliations { 
+            display: flex; justify-content: center; gap: 24px; 
+            font-size: 15px; color: var(--text-sub); margin-bottom: 32px;
+        }
+        
+        /* Buttons */
+        .button-group { display: flex; justify-content: center; gap: 16px; margin-top: 32px; flex-wrap: wrap;}
+        .paper-button {
+            padding: 10px 20px;
+            border-radius: 100px;
+            color: #fff;
+            background-color: rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .paper-button:hover {
+            background-color: #fff;
+            color: #000;
+            transform: translateY(-2px);
+        }
 
-    .metric-card {
-      background: #fff;
-      padding: 40px 32px;
-      border-radius: 18px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        /* ================= Abstract ================= */
+        .abstract-content {
+            background: var(--bg-darker);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .teaser-image {
+            width: 100%;
+            border-radius: 16px;
+            margin-top: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .caption {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-sub);
+            text-align: justify;
+        }
 
-    .metric-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    }
+        /* ================= Stats Grid ================= */
+        .stats-grid {
+            display: flex; justify-content: center; align-items: center; gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: 40px; font-weight: 700; color: var(--accent-blue);
+            font-family: "Raleway", sans-serif;
+        }
+        .stat-label { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); }
+        .stat-line { width: 1px; height: 40px; background: rgba(255,255,255,0.1); transform: rotate(15deg); }
 
-    .metric-value {
-      font-size: 56px;
-      line-height: 1;
-      font-weight: 700;
-      color: var(--apple-blue);
-      margin-bottom: 12px;
-    }
+        /* ================= Marquee (Dark Style) ================= */
+        .marquee-container {
+            overflow: hidden;
+            padding: 40px 0;
+            background: linear-gradient(to bottom, #28282d 0%, #1d1d21 100%);
+            position: relative;
+        }
+        .marquee-container::before, .marquee-container::after {
+            content: ""; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; pointer-events: none;
+        }
+        .marquee-container::before { left: 0; background: linear-gradient(to right, #28282d, transparent); }
+        .marquee-container::after { right: 0; background: linear-gradient(to left, #28282d, transparent); }
+        
+        .marquee-track { display: flex; gap: 24px; width: max-content; }
+        .track-row-1 { animation: scrollLeft 60s linear infinite; }
+        .track-row-2 { margin-top: 24px; animation: scrollRight 65s linear infinite; }
+        
+        .marquee-container:hover .marquee-track { animation-play-state: paused; }
 
-    .metric-label {
-      font-size: 17px;
-      line-height: 1.23536;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
-    /* ========== TABLE ========== */
-    .table-container {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-    }
+        .bench-card {
+            flex: 0 0 300px;
+            background: #222;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+        .bench-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .bench-image { width: 100%; height: 160px; object-fit: cover; opacity: 0.8; }
+        .bench-content { padding: 16px; }
+        .bench-category { font-size: 11px; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .bench-title { font-size: 16px; color: #fff; margin-bottom: 6px; }
+        .bench-description { font-size: 13px; color: #888; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-    .results-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        /* ================= Video Grids & Comparison ================= */
+        .case-section { margin-bottom: 120px; }
+        .case-header { 
+            margin-bottom: 32px; 
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 20px;
+        }
+        .case-header h3 { font-size: 24px; color: #fff; }
+        .case-number { font-size: 12px; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 8px;}
 
-    .results-table th {
-      padding: 16px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--border-color);
-      background: var(--apple-gray);
-      text-align: center;
-    }
+        /* LongCat Style Grid */
+        .grid4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
 
-    .results-table th:first-child {
-      text-align: left;
-    }
+        .video-player {
+            position: relative;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .video-player video { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .video-player.ours { border: 1px solid var(--accent-blue); box-shadow: 0 0 20px rgba(60, 140, 255, 0.2); }
+        
+        .video-label {
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            padding: 4px 10px; border-radius: 6px;
+            font-size: 12px; font-weight: 500; z-index: 2;
+        }
+        .video-player.ours .video-label { background: var(--accent-blue); color: #fff; }
 
-    .results-table td {
-      padding: 16px;
-      font-size: 15px;
-      color: var(--text-primary);
-      border-bottom: 1px solid var(--border-color);
-      text-align: center;
-    }
+        /* Audio Controls (LongCat Style) */
+        .audio-control { cursor: pointer; }
+        .audio-button {
+            position: absolute; right: 12px; bottom: 12px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: rgba(255,255,255,0.9) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM19 12c0 2.86-1.67 5.3-4 6.35V5.65c2.33 1.05 4 3.49 4 6.35zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>') no-repeat center;
+            background-size: 18px;
+            opacity: 0; transition: all 0.3s; z-index: 5;
+        }
+        .video-player:hover .audio-button { opacity: 1; }
+        body[muted=false] .audio-button {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>');
+        }
+        
+        /* Progress Bar */
+        .duration-indicator .bar {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+            background: rgba(255,255,255,0.2);
+        }
+        .duration-indicator .barinner { height: 100%; width: 0; background: var(--accent-blue); transition: width 0.1s linear; }
 
-    .results-table td:first-child {
-      text-align: left;
-      font-weight: 500;
-    }
+        /* ================= Quantitative Table ================= */
+        .table-container {
+            background: #1d1d21;
+            border-radius: 16px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .results-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .results-table th {
+            text-align: center; padding: 16px; color: var(--text-sub);
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .results-table td {
+            text-align: center; padding: 16px; color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .results-table tr.highlight { background: rgba(60, 140, 255, 0.1); }
+        .results-table tr.highlight td { color: var(--accent-blue); font-weight: 700; }
 
-    .results-table tr:last-child td {
-      border-bottom: none;
-    }
+        /* ================= BibTeX ================= */
+        .bibtex-container {
+            background: #151518;
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #b9bbc6;
+            overflow-x: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-    .results-table tr:hover {
-      background: #fafafa;
-    }
+        /* ================= Footer ================= */
+        footer {
+            background: #000;
+            padding: 48px 0;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-sub);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
 
-    .results-table tr.highlight {
-      background: #f0f7ff;
-    }
-
-    .results-table tr.highlight:hover {
-      background: #e8f2ff;
-    }
-
-    .results-table tr.highlight td {
-      font-weight: 600;
-      color: var(--apple-blue);
-    }
-
-    /* ========== FOOTER ========== */
-    footer {
-      background: var(--apple-gray);
-      padding: 48px 0;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      border-top: 1px solid var(--border-color);
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 1068px) {
-      .hero-title { font-size: 48px; }
-      .section-title { font-size: 40px; }
-      .video-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .metrics-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 735px) {
-      .hero-title { font-size: 40px; }
-      .hero-subtitle { font-size: 21px; }
-      .section-title { font-size: 32px; }
-      .video-grid { grid-template-columns: 1fr; }
-      .authors-list { font-size: 15px; }
-      .abstract-text { font-size: 17px; }
-    }
-  </style>
+        /* ================= Responsive ================= */
+        @media (max-width: 1024px) {
+            .grid4 { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 36px; }
+        }
+        @media (max-width: 640px) {
+            .grid4 { grid-template-columns: 1fr; }
+            .stats-grid { gap: 20px; }
+            .stat-line { display: none; }
+            .hero-title { font-size: 32px; }
+            section { padding: 40px 16px; }
+        }
+    </style>
 </head>
-<body>
+<body muted="true">
 
-  <!-- HERO -->
-  <section class="hero">
+    <!-- HERO SECTION -->
+    <section id="intro">
+        <!-- Using one of the project videos as a blurred background loop -->
+        <div class="background-video">
+            <video muted loop playsinline autoplay src="videos/kitchen/case1_ours.mp4"></video>
+        </div>
+        
+        <div class="content">
+            <h1 class="hero-title">Active Intelligence in Video Avatars via Closed-loop World Modeling</h1>
+            
+            <div class="authors-list">
+                <span><a href="https://xuanhuahe.github.io/" class="author-name">Xuanhua He</a><sup style="font-size: 12px; color:var(--text-sub)">1,*</sup></span>
+                <span><a href="https://tianyu-yang.com/" class="author-name">Tianyu Yang</a><sup style="font-size: 12px; color:var(--text-sub)">2,†</sup></span>
+                <span><a href="https://scholar.google.com/citations?hl=zh-CN&user=3qMrWmgAAAAJ&view_op=list_works" class="author-name">Ke Cao</a><sup style="font-size: 12px; color:var(--text-sub)">3</sup></span>
+                <span><a href="https://rq-wu.github.io/" class="author-name">Ruiqi Wu</a><sup style="font-size: 12px; color:var(--text-sub)">2</sup></span>
+                <span><a href="https://scholar.google.com/citations?user=l7euS7AAAAAJ&hl=en" class="author-name">Cheng Meng</a><sup style="font-size: 12px; color:var(--text-sub)">2</sup></span>
+                <span><a href="https://yzhang2016.github.io/" class="author-name">Yong Zhang</a><sup style="font-size: 12px; color:var(--text-sub)">2,‡</sup></span>
+                <span><a href="https://scholar.google.com/citations?user=W1ZXjMkAAAAJ&hl=en" class="author-name">Zhuoliang Kang</a><sup style="font-size: 12px; color:var(--text-sub)">2</sup></span>
+                <span><a href="https://scholar.google.com/citations?user=JXV5yrZxj5MC&hl=zh-CN" class="author-name">Xiaoming Wei</a><sup style="font-size: 12px; color:var(--text-sub)">2</sup></span>
+                <span><a href="https://cqf.io/" class="author-name">Qifeng Chen</a><sup style="font-size: 12px; color:var(--text-sub)">1,†</sup></span>
+            </div>
+
+            <div class="affiliations">
+                <span><sup>1</sup>HKUST</span>
+                <span><sup>2</sup>Meituan</span>
+                <span><sup>3</sup>USTC</span>
+            </div>
+            
+            <p style="font-size: 12px; opacity: 0.6;">*Work done during internship at Meituan &nbsp; †Corresponding authors &nbsp; ‡Project leader</p>
+
+            <div class="button-group">
+                <a href="#" class="paper-button">
+                    <i class="fas fa-file-pdf"></i> Read the Paper
+                </a>
+                <a href="https://github.com/omnihuman-lab" class="paper-button">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <a href="#" class="paper-button">
+                    <i class="fas fa-database"></i> Dataset
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABSTRACT -->
+    <section>
+        <div class="container text-center">
+            <h2 class="mb-small">Abstract</h2>
+            <div class="abstract-content">
+                <p>
+                    Current video avatars excel at visuals but lack agency. We bridge this gap with L-IVA, a benchmark for long-horizon planning, and ORCA, a framework enabling active intelligence. ORCA mimics an Internal World Model via a closed-loop Observe-Think-Act-Reflect (OTAR) cycle and a hierarchical Dual-System architecture. This design allows avatars to autonomously reason, verify outcomes, and correct errors in real-time. Extensive experiments demonstrate that ORCA significantly outperforms baselines, advancing video avatars from passive animation to active, goal-oriented behavior.        </p>
+                </p>
+                <img src="assets/main_large.png" alt="ORCA Framework" class="teaser-image">
+                <p class="caption">
+                    <strong>Figure 1. The ORCA Framework.</strong> ORCA enables active intelligence via a closed-loop <strong>OTAR (Observe-Think-Act-Reflect)</strong> cycle. It features a dual-system architecture: <strong>System 2</strong> performs high-level strategic planning and state tracking, while <strong>System 1</strong> grounds abstract plans into precise, model-specific action captions for the video generation model.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENCHMARK (Dark Marquee) -->
+    <section style="background: #1d1d21;">
+        <div class="container">
+            <div class="text-center mb-large">
+                <h2>The L-IVA Benchmark</h2>
+                <p style="max-width: 800px; margin: 0 auto 30px;">
+                    Unlike traditional benchmarks that evaluate single-clip aesthetics, <strong>L-IVA</strong> is the first benchmark designed to assess <strong>goal-directed planning</strong> in stochastic generative environments.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">100</div>
+                        <div class="stat-label">Interactive Tasks</div>
+                    </div>
+                    <div class="stat-line"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Diverse Scenarios</div>
+                    </div>
+                    <div class="stat-line"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">3-8</div>
+                        <div class="stat-label">Steps per Task</div>
+                    </div>
+                    <div class="stat-line"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">Goal</div>
+                        <div class="stat-label">Oriented Evaluation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee-container">
+            <div class="marquee-track track-row-1">
+                <!-- Items repeated for loop effect -->
+                <div class="bench-card">
+                    <img src="assets/bench/garden_case7.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Garden</div>
+                        <div class="bench-title">mix soil and fertilizer</div>
+                        <div class="bench-description">mix soil and fertilizer in the wheelbarrow</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/kitchen_case5.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Kitchen</div>
+                        <div class="bench-title">Fry the egg</div>
+                        <div class="bench-description">fry the egg</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/livestream_case12.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Livestream</div>
+                        <div class="bench-title">Product Demo</div>
+                        <div class="bench-description">demonstrate the application of a facial serum</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/office_case5.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Office</div>
+                        <div class="bench-title">Leave Office</div>
+                        <div class="bench-description">Finish work for the day, pack up personal items</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/workshop_case1.jpg" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Workshop</div>
+                        <div class="bench-title">Sharpen Saw</div>
+                        <div class="bench-description">Stop the current work, take the saw from the wall, and sharpen it</div>
+                    </div>
+                </div>
+                 <!-- Duplicates for marquee -->
+                 <div class="bench-card">
+                    <img src="assets/bench/garden_case7.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Garden</div>
+                        <div class="bench-title">mix soil and fertilizer</div>
+                        <div class="bench-description">mix soil and fertilizer in the wheelbarrow</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/kitchen_case5.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Kitchen</div>
+                        <div class="bench-title">Fry the egg</div>
+                        <div class="bench-description">fry the egg</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="marquee-track track-row-2">
+                 <div class="bench-card">
+                    <img src="assets/bench/garden_case17.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Garden</div>
+                        <div class="bench-title">Clean up the trash</div>
+                        <div class="bench-description">Put the trash in a bag</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/kitchen_case17.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Kitchen</div>
+                        <div class="bench-title">Wash Plate</div>
+                        <div class="bench-description">collaborate to wash, dry, and stack a dinner plate</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/livestream_case19.jpg" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Livestream</div>
+                        <div class="bench-title">Install GPU</div>
+                        <div class="bench-description">collaborate to install the graphics card into the PC case</div>
+                    </div>
+                </div>
+                <div class="bench-card">
+                    <img src="assets/bench/office_case17.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Office</div>
+                        <div class="bench-title">Fix Printer</div>
+                        <div class="bench-description">collaborate to remove jammed paper from the printer</div>
+                    </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="bench-card">
+                    <img src="assets/bench/garden_case17.png" class="bench-image">
+                    <div class="bench-content">
+                        <div class="bench-category">Garden</div>
+                        <div class="bench-title">Clean up the trash</div>
+                        <div class="bench-description">Put the trash in a bag</div>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- QUALITATIVE RESULTS -->
+<!-- QUALITATIVE RESULTS -->
+<section id="qualitative">
     <div class="container">
-      <!-- <div class="hero-eyebrow">New Research</div> -->
-      
-      <h1 class="hero-title">Active Intelligence in Video Avatars via Closed-loop World Modeling</h1>
-      
-      <!-- <p class="hero-subtitle">
-        Closed-loop World Modeling via Observe-Think-Act-Reflect Cycles
-      </p> -->
-
-      <div class="authors-section">
-        <div class="authors-list">
-          <span><a href="https://xuanhuahe.github.io/" class="author-name">Xuanhua He</a><sup class="sup">1,*</sup></span>
-          <span><a href="https://tianyu-yang.com/" class="author-name">Tianyu Yang</a><sup class="sup">2,†</sup></span>
-          <span><a href="https://scholar.google.com/citations?hl=zh-CN&user=3qMrWmgAAAAJ&view_op=list_works" class="author-name">Ke Cao</a><sup class="sup">3</sup></span>
-          <span><a href="https://rq-wu.github.io/" class="author-name">Ruiqi Wu</a><sup class="sup">2</sup></span>
-          <span><a href="https://scholar.google.com/citations?user=l7euS7AAAAAJ&hl=en" class="author-name">Cheng Meng</a><sup class="sup">2</sup></span>
-          <span><a href="https://yzhang2016.github.io/" class="author-name">Yong Zhang</a><sup class="sup">2,‡</sup></span>
-          <span><a href="https://scholar.google.com/citations?user=W1ZXjMkAAAAJ&hl=en" class="author-name">Zhuoliang Kang</a><sup class="sup">2</sup></span>
-          <span><a href="https://scholar.google.com/citations?user=JXV5yrZxj5MC&hl=zh-CN" class="author-name">Xiaoming Wei</a><sup class="sup">2</sup></span>
-          <span><a href="https://cqf.io/" class="author-name">Qifeng Chen</a><sup class="sup">1,†</sup></span>
-        </div>
-
-        <div class="affiliations">
-          <span class="affiliation-item"><sup class="sup">1</sup>HKUST</span>
-          <span class="affiliation-item"><sup class="sup">2</sup>Meituan</span>
-          <span class="affiliation-item"><sup class="sup">3</sup>USTC</span>
-        </div>
-
-        <div class="author-notes">
-          <span>*Work done during internship at Meituan</span>
-          <span>†Corresponding authors</span>
-          <span>‡Project leader</span>
-        </div>
+      <div class="text-center mb-large">
+        <h2>Qualitative Results</h2>
+        <p>Comparing ORCA against state-of-the-art baselines</p>
       </div>
 
-      <div class="button-group">
-        <a href="#" class="btn btn-primary">
-          <i class="fa-solid fa-file-pdf"></i>
-          Read the paper
-        </a>
-        <a href="https://github.com/omnihuman-lab" class="btn btn-secondary">
-          <i class="fa-brands fa-github"></i>
-          View on GitHub
-        </a>
-        <a href="#" class="btn btn-secondary">
-          <i class="fa-solid fa-database"></i>
-          Dataset
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABSTRACT -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Abstract</h2>
-      </div>
-
-      <div class="abstract-content">
-        <p class="abstract-text">
-          Current video avatars excel at visuals but lack agency. We bridge this gap with L-IVA, a benchmark for long-horizon planning, and ORCA, a framework enabling active intelligence. ORCA mimics an Internal World Model via a closed-loop Observe-Think-Act-Reflect (OTAR) cycle and a hierarchical Dual-System architecture. This design allows avatars to autonomously reason, verify outcomes, and correct errors in real-time. Extensive experiments demonstrate that ORCA significantly outperforms baselines, advancing video avatars from passive animation to active, goal-oriented behavior.        </p>
-      </div>
-
-      <figure style="width: 100%; margin: 32px 0 0 0;">
-        <img src="assets/main_large.png" alt="ORCA Framework Overview" class="teaser-image">
-        
-        <!-- 图注部分 -->
-        <figcaption style="
-          margin-top: 16px; 
-          font-size: 14px; 
-          line-height: 1.5; 
-          color: var(--text-secondary); 
-          text-align: justify; /* 两端对齐，更有论文感 */
-        ">
-          <strong>Figure 1. The ORCA Framework.</strong> 
-          ORCA enables active intelligence via a closed-loop <strong>OTAR (Observe-Think-Act-Reflect)</strong> cycle. 
-          It features a dual-system architecture: <strong>System 2</strong> performs high-level strategic planning and state tracking, 
-          while <strong>System 1</strong> grounds abstract plans into precise, model-specific action captions for the video generation model.
-        </figcaption>
-      </figure>
-          </div>
-  </section>
-
-  <!-- BENCHMARK -->
-  <section class="section section-gray">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">The L-IVA Benchmark</h2>
-        <div class="benchmark-intro">
-          <p class="section-description">
-            Unlike traditional benchmarks that evaluate single-clip aesthetics, <strong>L-IVA</strong> is the first benchmark designed to assess 
-            <strong>goal-directed planning</strong> in stochastic generative environments. 
-            It requires agents to autonomously complete complex, multi-step interactions.
-          </p>
-          
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-number">100</div>
-              <div class="stat-label">Interactive Tasks</div>
-            </div>
-            <div class="stat-line"></div>
-            <div class="stat-item">
-              <div class="stat-number">5</div>
-              <div class="stat-label">Diverse Scenarios</div>
-            </div>
-            <div class="stat-line"></div>
-            <div class="stat-item">
-              <div class="stat-number">3-8</div>
-              <div class="stat-label">Steps per Task</div>
-            </div>
-            <div class="stat-line"></div>
-            <div class="stat-item">
-              <div class="stat-number">Goal</div>
-              <div class="stat-label">Oriented Evaluation</div>
-            </div>
-          </div>
-        </div>
-        <!-- <p class="section-subtitle">
-          100 interactive tasks across 5 real-world scenarios
-        </p> -->
-      </div>
-    </div>
-
-    <div class="marquee-container">
-      <div class="marquee-track track-row-1">
-        <!-- Set 1 -->
-        <div class="bench-card">
-          <img src="assets/bench/garden_case7.png" alt="Garden" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Garden</div>
-            <h3 class="bench-title">put leaves</h3>
-            <p class="bench-description">work together to put the pile of leaves into the trash bag</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/garden_case17.png" alt="Garden" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Garden</div>
-            <h3 class="bench-title">mix soil and fertilizer</h3>
-            <p class="bench-description">mix soil and fertilizer in the wheelbarrow</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/kitchen_case5.png" alt="Kitchen" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Kitchen</div>
-            <h3 class="bench-title">fry the egg</h3>
-            <p class="bench-description">fry the egg</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/kitchen_case17.png" alt="Kitchen" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Kitchen</div>
-            <h3 class="bench-title">wash a dinner plate</h3>
-            <p class="bench-description">collaborate to wash, dry, and stack a dinner plate</p>
-          </div>
-        </div>
-
-        <div class="bench-card">
-          <img src="assets/bench/livestream_case12.png" alt="Livestream" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Livestream</div>
-            <h3 class="bench-title">product demo</h3>
-            <p class="bench-description">demonstrate the application of a facial serum</p>
-          </div>
-        </div>
-
-        <div class="bench-card">
-          <img src="assets/bench/livestream_case19.jpg" alt="Livestream" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Livestream</div>
-            <h3 class="bench-title">install the graphics card</h3>
-            <p class="bench-description">collaborate to install the graphics card into the PC case</p>
-          </div>
-        </div>
-
-
-        <div class="bench-card">
-          <img src="assets/bench/office_case5.png" alt="Office" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Office</div>
-            <h3 class="bench-title">leave the office</h3>
-            <p class="bench-description">Finish work for the day, pack up personal items, and get ready to leave the office</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/office_case17.png" alt="Office" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Office</div>
-            <h3 class="bench-title">remove jammed paper</h3>
-            <p class="bench-description">collaborate to remove jammed paper from the printer</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/workshop_case1.jpg" alt="Workshop" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Workshop</div>
-            <h3 class="bench-title">sharpen the saw</h3>
-            <p class="bench-description">Stop the current work, take the saw from the wall, and sharpen it</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/workshop_case16.png" alt="Workshop" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Workshop</div>
-            <h3 class="bench-title">mount the wooden shelf onto the wall</h3>
-            <p class="bench-description">collaborate to mount the wooden shelf onto the wall</p>
-          </div>
-        </div>
-
-        <!-- Set 2 (duplicate for seamless loop) -->      </div>
-    </div>
-    <div class="marquee-container">
-      <div class="marquee-track track-row-2">
-        <!-- Set 1 -->
-        <div class="bench-card">
-          <img src="assets/bench/garden_case7.png" alt="Garden" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Garden</div>
-            <h3 class="bench-title">put leaves</h3>
-            <p class="bench-description">work together to put the pile of leaves into the trash bag</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/garden_case17.png" alt="Garden" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Garden</div>
-            <h3 class="bench-title">mix soil and fertilizer</h3>
-            <p class="bench-description">mix soil and fertilizer in the wheelbarrow</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/kitchen_case5.png" alt="Kitchen" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Kitchen</div>
-            <h3 class="bench-title">fry the egg</h3>
-            <p class="bench-description">fry the egg</p>
-          </div>
-        </div>
-        
-        <div class="bench-card">
-          <img src="assets/bench/kitchen_case17.png" alt="Kitchen" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Kitchen</div>
-            <h3 class="bench-title">wash a dinner plate</h3>
-            <p class="bench-description">collaborate to wash, dry, and stack a dinner plate</p>
-          </div>
-        </div>
-
-        <div class="bench-card">
-          <img src="assets/bench/livestream_case12.png" alt="Livestream" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Livestream</div>
-            <h3 class="bench-title">product demo</h3>
-            <p class="bench-description">demonstrate the application of a facial serum</p>
-          </div>
-        </div>
-
-        <div class="bench-card">
-          <img src="assets/bench/livestream_case19.jpg" alt="Livestream" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Livestream</div>
-            <h3 class="bench-title">install the graphics card</h3>
-            <p class="bench-description">collaborate to install the graphics card into the PC case</p>
-          </div>
-        </div>
-
-
-        <div class="bench-card">
-          <img src="assets/bench/office_case5.png" alt="Office" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Office</div>
-            <h3 class="bench-title">leave the office</h3>
-            <p class="bench-description">Finish work for the day, pack up personal items, and get ready to leave the office</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/office_case17.png" alt="Office" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Office</div>
-            <h3 class="bench-title">remove jammed paper</h3>
-            <p class="bench-description">collaborate to remove jammed paper from the printer</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/workshop_case1.jpg" alt="Workshop" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Workshop</div>
-            <h3 class="bench-title">sharpen the saw</h3>
-            <p class="bench-description">Stop the current work, take the saw from the wall, and sharpen it</p>
-          </div>
-        </div>
-        <div class="bench-card">
-          <img src="assets/bench/workshop_case16.png" alt="Workshop" class="bench-image">
-          <div class="bench-content">
-            <div class="bench-category">Workshop</div>
-            <h3 class="bench-title">mount the wooden shelf onto the wall</h3>
-            <p class="bench-description">collaborate to mount the wooden shelf onto the wall</p>
-          </div>
-        </div>
-
-        <!-- Set 2 (duplicate for seamless loop) -->      </div>
-    </div>
-
-  </section>
-
-  <!-- QUALITATIVE RESULTS -->
-  <section class="section">
-    <div class="container-large">
-      <div class="section-header">
-        <h2 class="section-title">Qualitative Results</h2>
-        <p class="section-subtitle">
-          Comparing ORCA against state-of-the-art baselines
-        </p>
-      </div>
-
+      <!-- Sticky Tabs Navigation -->
       <div class="tabs-sticky">
         <div class="tabs-container">
           <button class="tab-button active" onclick="switchTab(event, 'kitchen')">Kitchen</button>
@@ -1133,522 +613,413 @@
         </div>
       </div>
 
-      <!-- Kitchen Tab -->
+      <!-- ================= Kitchen Tab ================= -->
       <div id="kitchen" class="tab-content active">
-        <div class="case-item">
+        <!-- Case 01 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-mug-hot"></i>
-              Make a cup of tea by scooping leaves into the pot
-            </h3>
+            <h3><i class="fa-solid fa-mug-hot"></i> Make a cup of tea by scooping leaves into the pot</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/kitchen/case1_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case1_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/kitchen/case1_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case1_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/kitchen/case1_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case1_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/kitchen/case1_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case1_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 02 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-carrot"></i>
-              Make Coffee
-            </h3>
+            <h3><i class="fa-solid fa-carrot"></i> Make Coffee</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/kitchen/case2_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case2_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/kitchen/case2_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case2_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/kitchen/case2_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case2_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/kitchen/case2_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/case2_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 03 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-faucet"></i>
-              prepare simple guacamole
-            </h3>
+            <h3><i class="fa-solid fa-faucet"></i> Prepare simple guacamole</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/kitchen/kitchen_case12_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/kitchen_case12_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/kitchen/kitchen_case12_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/kitchen_case12_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/kitchen/kitchen_case12_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/kitchen_case12_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/kitchen/kitchen_case12_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/kitchen/kitchen_case12_Ours.mp4"></video>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Livestream Tab -->
+      <!-- ================= Livestream Tab ================= -->
       <div id="livestream" class="tab-content">
-        <div class="case-item">
+        <!-- Case 01 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-box-open"></i>
-              Demonstrate the multi-light features of the makeup mirror
-            </h3>
+            <h3><i class="fa-solid fa-box-open"></i> Demonstrate the multi-light features of the makeup mirror</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/livestream/case2_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case2_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/livestream/case2_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case2_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/livestream/case2_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case2_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/livestream/case2_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case2_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 02 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-shirt"></i>
-              Demonstrate how to make a simple vegetable salad
-            </h3>
+            <h3><i class="fa-solid fa-shirt"></i> Demonstrate how to make a simple vegetable salad</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/livestream/case5_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case5_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/livestream/case5_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case5_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/livestream/case5_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case5_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/livestream/case5_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/case5_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 03 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-hand-holding-dollar"></i>
-              put on a diamond necklace and display it
-            </h3>
+            <h3><i class="fa-solid fa-hand-holding-dollar"></i> Put on a diamond necklace and display it</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/livestream/livestream_case13_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/livestream_case13_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/livestream/livestream_case13_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/livestream_case13_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/livestream/livestream_case13_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/livestream_case13_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/livestream/livestream_case13_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/livestream/livestream_case13_Ours.mp4"></video>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Garden Tab -->
+      <!-- ================= Garden Tab ================= -->
       <div id="garden" class="tab-content">
-        <div class="case-item">
+        <!-- Case 01 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-seedling"></i>
-              mix soil and fertilizer in the wheelbarrow
-            </h3>
+            <h3><i class="fa-solid fa-seedling"></i> Mix soil and fertilizer in the wheelbarrow</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/garden_case7_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case7_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/garden/garden_case7_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case7_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/garden/garden_case7_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case7_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/garden_case7_Ours.mp4"controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case7_Ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 02 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-water"></i>
-              Checking beehives
-            </h3>
+            <h3><i class="fa-solid fa-water"></i> Checking beehives</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/case5_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/case5_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/garden/case5_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/case5_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/garden/case5_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/case5_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/case5_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/case5_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 03 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-trowel"></i>
-              start a fire in the fire pit
-            </h3>
+            <h3><i class="fa-solid fa-fire"></i> Start a fire in the fire pit</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/garden_case10_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case10_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/garden/garden_case10_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case10_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/garden/garden_case10_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case10_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/garden_case10_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/garden/garden_case10_Ours.mp4"></video>
             </div>
           </div>
+        </div>
+
+        <!-- Case 04 -->
+
+
+         <!-- Case 05 -->
+
         </div>
       </div>
 
-            <!-- Garden Tab -->
-      <div id="garden" class="tab-content">
-        <div class="case-item">
-          <div class="case-header">
-            <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-seedling"></i>
-              Transfer the seedling to the larger pot
-            </h3>
-          </div>
-          <div class="video-grid">
-            <div class="video-item">
-              <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/case1_openloop.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">Reactive</span>
-              <video src="videos/garden/case1_react.mp4"controls  muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">VAGEN</span>
-              <video src="videos/garden/case1_vagen.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item ours">
-              <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/case1_ours.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-          </div>
-        </div>
-
-        <div class="case-item">
-          <div class="case-header">
-            <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-water"></i>
-              Water the hanging flowers with the can
-            </h3>
-          </div>
-          <div class="video-grid">
-            <div class="video-item">
-              <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/case5_openloop.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">Reactive</span>
-              <video src="videos/garden/case5_react.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">VAGEN</span>
-              <video src="videos/garden/case5_vagen.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item ours">
-              <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/case5_ours.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-          </div>
-        </div>
-
-        <div class="case-item">
-          <div class="case-header">
-            <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-trowel"></i>
-              Dig a small hole for the new seeds
-            </h3>
-          </div>
-          <div class="video-grid">
-            <div class="video-item">
-              <span class="video-label">Open-Loop</span>
-              <video src="videos/garden/c3_open.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">Reactive</span>
-              <video src="videos/garden/c3_react.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item">
-              <span class="video-label">VAGEN</span>
-              <video src="videos/garden/c3_vagen.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-            <div class="video-item ours">
-              <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/garden/c3_ours.mp4" controls muted autoplay loop playsinline></video>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Garden Tab -->
+      <!-- ================= Office Tab ================= -->
       <div id="office" class="tab-content">
-        <div class="case-item">
+        <!-- Case 01 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-seedling"></i>
-              Pause reading the book and join an online meeting
-            </h3>
+            <h3><i class="fa-solid fa-book-open"></i> Pause reading the book and join an online meeting</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/office/case1_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case1_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/office/case1_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case1_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/office/case1_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case1_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/office/case1_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case1_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 02 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-water"></i>
-              Prepare for an upcoming video meeting and joining the call
-            </h3>
+            <h3><i class="fa-solid fa-video"></i> Prepare for an upcoming video meeting and joining the call</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/office/case4_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case4_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/office/case4_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case4_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/office/case4_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/case4_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/office/office_case4_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/office_case4_Ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 03 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-trowel"></i>
-              replace the toner cartridge in the copier
-            </h3>
+            <h3><i class="fa-solid fa-print"></i> Replace the toner cartridge in the copier</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/office/office_case8_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/office_case8_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/office/office_case8_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/office_case8_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/office/office_case8_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/office_case8_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/office/office_case8_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/office/office_case8_Ours.mp4"></video>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Garden Tab -->
+      <!-- ================= Workshop Tab ================= -->
       <div id="workshop" class="tab-content">
-        <div class="case-item">
+        <!-- Case 01 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 01</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-seedling"></i>
-              Transfer the seedling to the larger pot
-            </h3>
+            <h3><i class="fa-solid fa-wrench"></i> Sharpen the saw</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/workshop/case3_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case3_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/workshop/case3_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case3_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/workshop/case3_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case3_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/workshop/case3_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case3_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 02 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 02</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-water"></i>
-              Prepare a plant leaf sample on a slide and observe it under the microscope
-            </h3>
+            <h3><i class="fa-solid fa-microscope"></i> Prepare a plant leaf sample and observe it</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/workshop/case5_openloop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case5_openloop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/workshop/case5_react.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case5_react.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/workshop/case5_vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case5_vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/workshop/case5_ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/case5_ours.mp4"></video>
             </div>
           </div>
         </div>
 
-        <div class="case-item">
+        <!-- Case 03 -->
+        <div class="case-section">
           <div class="case-header">
             <span class="case-number">Case 03</span>
-            <h3 class="case-title">
-              <i class="fa-solid fa-trowel"></i>
-              add motor oil to the engine
-            </h3>
+            <h3><i class="fa-solid fa-oil-can"></i> Add motor oil to the engine</h3>
           </div>
-          <div class="video-grid">
-            <div class="video-item">
+          <div class="grid4">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Open-Loop</span>
-              <video src="videos/workshop/workshop_case7_OpenLoop.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/workshop_case7_OpenLoop.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">Reactive</span>
-              <video src="videos/workshop/workshop_case7_React.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/workshop_case7_React.mp4"></video>
             </div>
-            <div class="video-item">
+            <div class="video-player audio-control duration-indicator">
               <span class="video-label">VAGEN</span>
-              <video src="videos/workshop/workshop_case7_Vagen.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/workshop_case7_Vagen.mp4"></video>
             </div>
-            <div class="video-item ours">
+            <div class="video-player ours audio-control duration-indicator">
               <span class="video-label">ORCA (Ours)</span>
-              <video src="videos/workshop/workshop_case7_Ours.mp4" controls muted autoplay loop playsinline></video>
+              <video loop playsinline preload="none" muted src="videos/workshop/workshop_case7_Ours.mp4"></video>
             </div>
           </div>
         </div>
@@ -1657,129 +1028,187 @@
     </div>
   </section>
 
-  <!-- QUANTITATIVE RESULTS -->
-  <section class="section section-gray">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Quantitative Results</h2>
-        <p class="section-subtitle">
-          ORCA achieves state-of-the-art performance across all metrics
-        </p>
-      </div>
 
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-value">71.0%</div>
-          <div class="metric-label">Task Success Rate</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">3.72</div>
-          <div class="metric-label">Physical Plausibility</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">28.7%</div>
-          <div class="metric-label">Human Preference(BWS)</div>
-        </div>
-      </div>
+    <!-- QUANTITATIVE RESULTS -->
+    <section style="background: linear-gradient(180deg, #28282d, #151518);">
+        <div class="container">
+            <div class="text-center mb-large">
+                <h2>Quantitative Results</h2>
+                <p>ORCA achieves state-of-the-art performance across all metrics</p>
+            </div>
 
-      <div class="table-container">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Method</th>
-              <th colspan="3">Task Success Rate (%) ↑</th>
-              <th colspan="3">Physical Plausibility (1-5) ↑</th>
-            </tr>
-            <tr>
-              <th>Kitchen</th>
-              <th>Garden</th>
-              <th>Average</th>
-              <th>Kitchen</th>
-              <th>Garden</th>
-              <th>Average</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Reactive Agent</td>
-              <td>56.7</td>
-              <td>55.0</td>
-              <td>50.9</td>
-              <td>3.47</td>
-              <td>3.08</td>
-              <td>3.11</td>
-            </tr>
-            <tr>
-              <td>Open-Loop Planner</td>
-              <td>72.3</td>
-              <td>46.2</td>
-              <td>62.3</td>
-              <td>3.57</td>
-              <td>2.92</td>
-              <td>3.17</td>
-            </tr>
-            <tr>
-              <td>VAGEN</td>
-              <td>70.8</td>
-              <td>60.0</td>
-              <td>61.2</td>
-              <td>3.56</td>
-              <td>2.54</td>
-              <td>3.22</td>
-            </tr>
-            <tr class="highlight">
-              <td>ORCA (Ours)</td>
-              <td>73.8</td>
-              <td>81.5</td>
-              <td>71.0</td>
-              <td>3.53</td>
-              <td>3.77</td>
-              <td>3.72</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Citation</h2>
-      </div>
-      <pre class="bibtex-container"><code>@article{he2025orca,
+            <div class="stats-grid mb-large">
+                <div class="stat-item">
+                    <div class="stat-number">71.0%</div>
+                    <div class="stat-label">Task Success Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3.72</div>
+                    <div class="stat-label">Physical Plausibility</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">28.7%</div>
+                    <div class="stat-label">Human Preference</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="text-align: left;">Method</th>
+                            <th colspan="3">Task Success Rate (%) ↑</th>
+                            <th colspan="3">Physical Plausibility (1-5) ↑</th>
+                        </tr>
+                        <tr>
+                            <th>Kitchen</th>
+                            <th>Garden</th>
+                            <th>Average</th>
+                            <th>Kitchen</th>
+                            <th>Garden</th>
+                            <th>Average</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; font-weight: 500;">Reactive Agent</td>
+                            <td>56.7</td><td>55.0</td><td>50.9</td><td>3.47</td><td>3.08</td><td>3.11</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; font-weight: 500;">Open-Loop Planner</td>
+                            <td>72.3</td><td>46.2</td><td>62.3</td><td>3.57</td><td>2.92</td><td>3.17</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; font-weight: 500;">VAGEN</td>
+                            <td>70.8</td><td>60.0</td><td>61.2</td><td>3.56</td><td>2.54</td><td>3.22</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td style="text-align: left;">ORCA (Ours)</td>
+                            <td>73.8</td><td>81.5</td><td>71.0</td><td>3.53</td><td>3.77</td><td>3.72</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CITATION -->
+    <section>
+        <div class="container">
+            <h2 class="mb-small">Citation</h2>
+            <pre class="bibtex-container"><code>@article{he2025orca,
     title={Active Intelligence in Video Avatars via Closed-loop World Modeling},
     author={He, Xuanhua and Yang, Tianyu and Cao, Ke and Wu, Ruiqi and Meng, Cheng and Zhang, Yong and Kang, Zhuoliang and Wei, Xiaoming and Chen, Qifeng},
     journal={arXiv preprint arXiv:2508.xxxxx},
     year={2025}
-  }</code></pre>
-    </div>
-  </section>
+}</code></pre>
+        </div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>Copyright © 2025 ORCA Project. All rights reserved.</p>
-    </div>
-  </footer>
-  <script>
-    function switchTab(event, tabId) {
-      // Hide all tab contents
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>Copyright © 2025 ORCA Project. All rights reserved.</p>
+            <p>The materials are for academic use only.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic from LongCat -->
+    <script>
+        // --- 1. Lazy Loading & Autoplay ---
+        const lazyLoadObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, {rootMargin: '200px'});
+
+        document.querySelectorAll("video").forEach(video => {
+            lazyLoadObserver.observe(video);
+            video.addEventListener("pointerdown", () => video.play());
+        });
+
+        // --- 2. Intro Scroll Effect ---
+        document.addEventListener("scroll", () => {
+            const top = Math.max(Math.min(window.scrollY / 500, 1), 0);
+            document.documentElement.style.setProperty('--intro-scale', top);
+        });
+
+        // --- 3. Audio Control ---
+        const body = document.querySelector("body");
+        let globalmuted = true;
+        
+        document.querySelectorAll(".audio-control").forEach(wrapper => {
+            const video = wrapper.querySelector("video");
+            const button = document.createElement("div");
+            button.className = "audio-button";
+            
+            button.onclick = function(e) {
+                e.stopPropagation();
+                globalmuted = !globalmuted;
+                video.muted = globalmuted;
+                body.setAttribute("muted", globalmuted);
+                // Sync all videos
+                document.querySelectorAll("video").forEach(v => v.muted = globalmuted);
+            }
+            wrapper.appendChild(button);
+        });
+
+        // Mobile floating audio toggle
+        const mobileAudioBtn = document.querySelector(".audio-button-mobile");
+        if(mobileAudioBtn) {
+            mobileAudioBtn.onclick = () => {
+                globalmuted = !globalmuted;
+                body.setAttribute("muted", globalmuted);
+                document.querySelectorAll("video").forEach(v => v.muted = globalmuted);
+            }
+        }
+
+        // --- 4. Progress Bar ---
+        document.querySelectorAll(".duration-indicator").forEach((wrapper) => {
+            const video = wrapper.querySelector("video");
+            const bar = document.createElement("div");
+            const barinner = document.createElement("div");
+            bar.className = "bar";
+            barinner.className = "barinner";
+            bar.appendChild(barinner);
+            wrapper.appendChild(bar);
+
+            function update() {
+                if (!isNaN(video.duration)) {
+                    barinner.style.width = `${video.currentTime / video.duration * 100}%`;
+                }
+                requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        });
+        function switchTab(event, tabId) {
+      // 1. Hide all tab contents
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
+        // Optional: Pause videos in hidden tabs to save performance
+        content.querySelectorAll('video').forEach(vid => vid.pause());
       });
       
-      // Remove active class from all buttons
+      // 2. Remove active class from all buttons
       document.querySelectorAll('.tab-button').forEach(button => {
         button.classList.remove('active');
       });
       
-      // Show selected tab content
-      document.getElementById(tabId).classList.add('active');
+      // 3. Show selected tab content
+      const activeContent = document.getElementById(tabId);
+      activeContent.classList.add('active');
       
-      // Add active class to clicked button
+      // 4. Play videos in the new tab if they are in view (trigger lazy load check)
+      // Note: The IntersectionObserver in the main script will handle the playing/pausing automatically
+      
+      // 5. Add active class to clicked button
       event.currentTarget.classList.add('active');
     }
-  </script>
 
+    </script>
 </body>
 </html>
