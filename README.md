@@ -1,7 +1,6 @@
 # Active Intelligence in Video Avatars via Closed-loop World Modeling 
 
-**[Project Page](https://xuanhuahe.github.io/ORCA/)** | **[arXiv](#)**| **[Huggingface](https://huggingface.co/datasets/Alexhe101/L-IVA)**
-
+**[Project Page](https://xuanhuahe.github.io/ORCA/)** | **[arXiv](https://arxiv.org/abs/2512.20615)**| **[Huggingface](https://huggingface.co/datasets/Alexhe101/L-IVA)**
 ---
 
 ## Introduction
@@ -27,7 +26,8 @@ To systematically evaluate active intelligence, we propose the **L-IVA** (Long-h
 
 **Project Page**: [https://xuanhuahe.github.io/ORCA/](https://xuanhuahe.github.io/ORCA/) 
 
-**arXiv**: [Link to be updated] 
+**arXiv**: [arxiv](https://arxiv.org/abs/2512.20615)
+
 
 
 
