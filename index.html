@@ -173,6 +173,36 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .hero-badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(60, 140, 255, 0.14);
+            border: 1px solid rgba(60, 140, 255, 0.35);
+            color: #dfeaff;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .hero-summary {
+            max-width: 760px;
+            margin: 0 auto 28px;
+            font-size: 18px;
+            color: #d7d9e3;
+        }
+
         /* Authors */
         .authors-list {
             display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px;
@@ -203,6 +233,17 @@
             background-color: #fff;
             color: #000;
             transform: translateY(-2px);
+        }
+
+        .paper-button.primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 24px rgba(60, 140, 255, 0.28);
+        }
+
+        .paper-button.primary:hover {
+            background: #fff;
+            border-color: #fff;
         }
 
         /* ================= Abstract ================= */
@@ -387,6 +428,7 @@
             .stats-grid { gap: 20px; }
             .stat-line { display: none; }
             .hero-title { font-size: 32px; }
+            .hero-summary { font-size: 16px; }
             section { padding: 40px 16px; }
         }
     </style>
@@ -401,6 +443,10 @@
         </div>
         
         <div class="content">
+            <div class="hero-badge-row">
+                <span class="hero-badge"><i class="fa-solid fa-trophy"></i> Accepted by CVPR 2026</span>
+                <span class="hero-badge"><i class="ai ai-arxiv"></i> arXiv:2512.20615</span>
+            </div>
             <h1 class="hero-title">Active Intelligence in Video Avatars via Closed-loop World Modeling</h1>
             
             <div class="authors-list">
@@ -422,16 +468,17 @@
             </div>
             
             <p style="font-size: 12px; opacity: 0.6;">*Work done during internship at Meituan &nbsp; †Corresponding authors &nbsp; ‡Project leader</p>
+            <p class="hero-summary">A closed-loop framework for goal-directed video avatars, combining world modeling, long-horizon planning, and self-correction in stochastic environments.</p>
 
             <div class="button-group">
-                <a href="#" class="paper-button">
-                    <i class="fas fa-file-pdf"></i> Read the Paper
+                <a href="https://arxiv.org/abs/2512.20615" class="paper-button primary" target="_blank" rel="noopener noreferrer">
+                    <i class="ai ai-arxiv"></i> arXiv
                 </a>
-                <a href="https://github.com/omnihuman-lab" class="paper-button">
-                    <i class="fab fa-github"></i> View on GitHub
+                <a href="https://github.com/omnihuman-lab" class="paper-button" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> Code
                 </a>
-                <a href="#" class="paper-button">
-                    <i class="fas fa-database"></i> Dataset
+                <a href="#citation" class="paper-button">
+                    <i class="fas fa-quote-right"></i> BibTeX
                 </a>
             </div>
         </div>
@@ -443,7 +490,7 @@
             <h2 class="mb-small">Abstract</h2>
             <div class="abstract-content">
                 <p>
-                    Current video avatars excel at visuals but lack agency. We bridge this gap with L-IVA, a benchmark for long-horizon planning, and ORCA, a framework enabling active intelligence. ORCA mimics an Internal World Model via a closed-loop Observe-Think-Act-Reflect (OTAR) cycle and a hierarchical Dual-System architecture. This design allows avatars to autonomously reason, verify outcomes, and correct errors in real-time. Extensive experiments demonstrate that ORCA significantly outperforms baselines, advancing video avatars from passive animation to active, goal-oriented behavior.        </p>
+                    Current video avatars excel at visuals but lack agency. We bridge this gap with L-IVA, a benchmark for long-horizon planning, and ORCA, a framework enabling active intelligence. ORCA mimics an Internal World Model via a closed-loop Observe-Think-Act-Reflect (OTAR) cycle and a hierarchical Dual-System architecture. This design allows avatars to autonomously reason, verify outcomes, and correct errors in real-time. Extensive experiments demonstrate that ORCA significantly outperforms baselines, advancing video avatars from passive animation to active, goal-oriented behavior.
                 </p>
                 <img src="assets/main_large.png" alt="ORCA Framework" class="teaser-image">
                 <p class="caption">
@@ -1094,13 +1141,13 @@
     </section>
 
     <!-- CITATION -->
-    <section>
+    <section id="citation">
         <div class="container">
             <h2 class="mb-small">Citation</h2>
             <pre class="bibtex-container"><code>@article{he2025orca,
     title={Active Intelligence in Video Avatars via Closed-loop World Modeling},
     author={He, Xuanhua and Yang, Tianyu and Cao, Ke and Wu, Ruiqi and Meng, Cheng and Zhang, Yong and Kang, Zhuoliang and Wei, Xiaoming and Chen, Qifeng},
-    journal={arXiv preprint arXiv:2508.xxxxx},
+    journal={arXiv preprint arXiv:2512.20615},
     year={2025}
 }</code></pre>
         </div>
